@@ -1,0 +1,13 @@
+#stage {
+  width: 400px;
+  height: 300px;
+  position: relative;
+}
+
+#car {
+  position: absolute;
+  width: 66px;
+  height: 66px;
+  background-image: url(http://www.clipartbest.com/cliparts/RTG/y8n/RTGy8nrkc.png);
+  background-position: 0px 0px;
+}
