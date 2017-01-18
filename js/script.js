@@ -1,10 +1,13 @@
 var ship = new Mover($('#ship'));
+var meteor = new Meteor($('#meteor1'));
 $('#meteor1')
   .css('left', Math.random() * (300 - 20) + 20 + 'px')
   .css('top', Math.random() * (200 - 30) + 30 + 'px')
   .show();
 function tick() {
   ship.animateMove();
+  meteor.changeCoords();
+  meteor.animateMove();
   var minDistination = 33;
   // проверка, что координаты не близки
   var leftCoordShip = parseInt($('#ship').css('left')) + parseInt($('#ship').css('width'))/2;
@@ -16,7 +19,7 @@ function tick() {
      Math.pow(topCoordShip - topCoordMeteor, 2)
   );
   if (realDistination < minDistination) {
-    bang();
+    ship.bang();
   }
 }
 $(document).keypress(function(event) {
@@ -35,6 +38,34 @@ $(document).keypress(function(event) {
       break;
   }
 });
+function Meteor(jqEl) {
+  this.jqEl = jqEl;
+  var _top, _left,
+      _newTop, _newLeft,
+      _step = 4,
+      me = this;
+  this.updateCoords = function() {
+    _top = parseInt(this.jqEl.css('top'));
+    _left = parseInt(this.jqEl.css('left'));
+  }
+  this.init = function() {
+    me.updateCoords();
+    _newTop = _top;
+    _newLeft = _left;
+  }
+  this.animateMove = function() {
+    me.updateCoords();
+    me.jqEl.stop();
+    me.jqEl.animate({
+      top: _newTop + 'px',
+      left: _newLeft + 'px',
+    }, {queue: false});
+  }
+  this.changeCoords = function () {
+    _newTop += _step;
+  }
+  this.init();
+}
 function Mover (jqEl) {
   this.jqEl = jqEl;
   var _top, _left,
@@ -74,11 +105,10 @@ function Mover (jqEl) {
     this.jqEl.css('background-position', '0px 132px');
     _newLeft += _step;
   }
+  this.bang = function(){
+    me.jqEl.css('border', ' 4px solid #000');
+  }
   this.init();
   return this;
-}
-function bang () {
-  alert('bang!!!');
-  console.log('bang');
 }
 setInterval(tick, 100);
