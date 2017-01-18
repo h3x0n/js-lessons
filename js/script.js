@@ -1,16 +1,37 @@
+var ship = new Mover($('#ship'));
+$('#meteor1')
+  .css('left', Math.random() * (300 - 20) + 20 + 'px')
+  .css('top', Math.random() * (200 - 30) + 30 + 'px')
+  .show();
+function tick() {
+  ship.animateMove();
+  var minDistination = 33;
+  // проверка, что координаты не близки
+  var leftCoordShip = parseInt($('#ship').css('left')) + parseInt($('#ship').css('width'))/2;
+  var topCoordShip = parseInt($('#ship').css('top')) + parseInt($('#ship').css('height'))/2;
+   var leftCoordMeteor = parseInt($('#meteor1').css('left')) + parseInt($('#meteor1').css('width'))/2;
+  var topCoordMeteor = parseInt($('#meteor1').css('top')) + parseInt($('#ship').css('height'))/2;
+  var realDistination = Math.sqrt(
+     Math.pow(leftCoordShip - leftCoordMeteor, 2) +
+     Math.pow(topCoordShip - topCoordMeteor, 2)
+  );
+  if (realDistination < minDistination) {
+    bang();
+  }
+}
 $(document).keypress(function(event) {
   switch(event.charCode) {
     case 119: // w
-      myCar.moveUp();
+      ship.moveUp();
       break;
     case 115: // s
-      myCar.moveBottom();
+      ship.moveBottom();
       break;
     case 97: // a
-      myCar.moveLeft();
+      ship.moveLeft();
       break;
     case 100: // d
-      myCar.moveRight();
+      ship.moveRight();
       break;
   }
 });
@@ -38,23 +59,26 @@ function Mover (jqEl) {
     }, {queue: false});
   }
   this.moveBottom = function() {
-  	this.jqEl.css('background-position', '0px 0px');
+    this.jqEl.css('background-position', '0px 0px');
     _newTop += _step;
   }
   this.moveLeft = function() {
-  	this.jqEl.css('background-position', '0px 198px');
+    this.jqEl.css('background-position', '0px 198px');
     _newLeft -= _step;
   }
   this.moveUp = function() {
-  	this.jqEl.css('background-position', '0px 66px');
+    this.jqEl.css('background-position', '0px 66px');
     _newTop -= _step;
   }
   this.moveRight = function() {
-  	this.jqEl.css('background-position', '0px 132px');
+    this.jqEl.css('background-position', '0px 132px');
     _newLeft += _step;
   }
   this.init();
   return this;
 }
-var myCar = new Mover($('#car'));
-setInterval(myCar.animateMove, 100);
+function bang () {
+  alert('bang!!!');
+  console.log('bang');
+}
+setInterval(tick, 100);
