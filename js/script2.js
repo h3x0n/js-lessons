@@ -19,23 +19,25 @@ function tick() {
     ship.bang();
   }
 }
+
 // Движение на клавиши
 $(document).keypress(function(event) {
   switch(event.charCode) {
-    case 1094: // w
+    case 119: // w
       ship.moveUp();
       break;
-    case 1099: // s
+    case 117: // s
       ship.moveBottom();
       break;
-    case 1092: // a
+    case 97: // a
       ship.moveLeft();
       break;
-    case 1074: // d
+    case 100: // d
       ship.moveRight();
       break;
   }
 });
+
 // Настройки метеорита
 function Meteor(jqEl) {
 	var me = this;
@@ -49,8 +51,8 @@ function Meteor(jqEl) {
 	me.leftStep = 0.5;
   // Изменение координат
 	me.changeCoords = function () {
-    me.newTop += me.topStep * me.step;
-    me.newLeft += me.leftStep * me.step;
+    me.newTop = me.newTop + me.topStep * me.step;
+    me.newLeft = me.newLeft + me.leftStep * me.step;
   }
   Mover(me, jqEl, settings);
 }
@@ -85,6 +87,7 @@ function Ship(jqEl) {
   Mover(me, jqEl, settings);
 }
 
+// Родительский класс
 function Mover(me, jqEl, settings) {
 	me.jqEl = jqEl;
 	me.step = settings.step ? settings.step : 10;
@@ -110,4 +113,5 @@ function Mover(me, jqEl, settings) {
 	me.newLeft = me.left;
 }
 
+// Запуск счетчика
 setInterval(tick, 100);
