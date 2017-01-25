@@ -1,18 +1,20 @@
 var ship = new Ship($('#ship'));
 var meteor = new Meteor($('#meteor1'), {
-    step: 4,
-    left: 50,
-    top: 50
-  });
+  step: 4,
+  left: 50,
+  top: 50
+});
 var meteor1 = new Meteor($('#meteor2'), {
-    step: 4,
-    left: 100,
-    top: 50
-  });
+  step: 14,
+  left: 100,
+  top: 50
+});
 function tick() {
   ship.animateMove();
   meteor.changeCoords();
   meteor.animateMove();
+  meteor1.changeCoords();
+  meteor1.animateMove();
   var minDistination = 33;
   // проверка, что координаты не близки
   var leftCoordShip = parseInt($('#ship').css('left')) + parseInt($('#ship').css('width'))/2;
@@ -49,7 +51,6 @@ $(document).keypress(function(event) {
 // Настройки метеорита
 function Meteor(jqEl, settings) {
 	var me = this;
-
 
 	me.topStep = 0.5;
 	me.leftStep = 0.5;
@@ -93,6 +94,7 @@ function Ship(jqEl) {
 
 // Родительский класс
 function Mover(me, jqEl, settings) {
+	debugger;
 	me.jqEl = jqEl;
 	me.step = settings.step ? settings.step : 10;
 	me.top = settings.top ? settings.top : 0;
@@ -111,6 +113,9 @@ function Mover(me, jqEl, settings) {
 			left: me.newLeft + 'px',
 		}, {queue: false});
 	}
+
+	me.jqEl.css('left', me.left + 'px');
+	me.jqEl.css('top', me.top + 'px');
 
 	me.updateCoords();
 	me.newTop = me.top;
