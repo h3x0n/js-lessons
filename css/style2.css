@@ -1,0 +1,37 @@
+#stage {
+  width: 500px;
+  height: 400px;
+  position: relative;
+  background-color: #eee;
+}
+
+#car {
+  position: absolute;
+  width: 66px;
+  height: 66px;
+  background-image: url(http://www.clipartbest.com/cliparts/RTG/y8n/RTGy8nrkc.png);
+  background-position: 0px 0px;
+}
+
+#ship {
+  top:334px;
+  left: 217px;
+  position: absolute;
+  width: 66px;
+  height: 66px;
+  background-image: url(http://www.clipartbest.com/cliparts/RTG/y8n/RTGy8nrkc.png);
+  background-position: 0px 66px;
+}
+
+.meteor {
+  
+  position: absolute;
+  width: 148px;
+  height: 125px;
+  background-image: url(https://www.spriters-resource.com/resources/sheet_icons/44/46508.png);
+}
+
+#meteor1 {
+  top: 0px;
+  left: 0px;
+}
