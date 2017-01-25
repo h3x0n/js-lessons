@@ -1,6 +1,14 @@
 var ship = new Ship($('#ship'));
-var meteor = new Meteor($('#meteor1'));
-
+var meteor = new Meteor($('#meteor1'), {
+    step: 4,
+    left: 50,
+    top: 50
+  });
+var meteor1 = new Meteor($('#meteor2'), {
+    step: 4,
+    left: 100,
+    top: 50
+  });
 function tick() {
   ship.animateMove();
   meteor.changeCoords();
@@ -26,7 +34,7 @@ $(document).keypress(function(event) {
     case 119: // w
       ship.moveUp();
       break;
-    case 117: // s
+    case 115: // s
       ship.moveBottom();
       break;
     case 97: // a
@@ -39,13 +47,9 @@ $(document).keypress(function(event) {
 });
 
 // Настройки метеорита
-function Meteor(jqEl) {
+function Meteor(jqEl, settings) {
 	var me = this;
-	var settings = {
-		step: 4,
-		left: 50,
-		top: 50
-	}
+
 
 	me.topStep = 0.5;
 	me.leftStep = 0.5;
