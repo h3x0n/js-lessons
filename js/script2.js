@@ -19,7 +19,7 @@ function tick() {
     ship.bang();
   }
 }
-
+// Движение на клавиши
 $(document).keypress(function(event) {
   switch(event.charCode) {
     case 1094: // w
@@ -36,7 +36,7 @@ $(document).keypress(function(event) {
       break;
   }
 });
-
+// Настройки метеорита
 function Meteor(jqEl) {
 	var me = this;
 	var settings = {
@@ -47,14 +47,14 @@ function Meteor(jqEl) {
 
 	me.topStep = 0.5;
 	me.leftStep = 0.5;
-
+  // Изменение координат
 	me.changeCoords = function () {
     me.newTop += me.topStep * me.step;
     me.newLeft += me.leftStep * me.step;
   }
   Mover(me, jqEl, settings);
 }
-
+// Настройки корабля
 function Ship(jqEl) {
 	var me = this;
 	var settings = {
@@ -62,7 +62,7 @@ function Ship(jqEl) {
 		left: 100,
 		top: 100
 	}
-
+  // Изменение спрайтов
   me.moveBottom = function() {
     me.jqEl.css('background-position', '0px 0px');
     me.newTop += me.step;

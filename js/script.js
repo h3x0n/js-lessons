@@ -42,7 +42,7 @@ function Meteor(jqEl) {
   this.jqEl = jqEl;
   var _top, _left,
       _newTop, _newLeft,
-      _step = 4,
+      _step = 10,
       me = this;
   this.updateCoords = function() {
     _top = parseInt(this.jqEl.css('top'));
@@ -112,3 +112,10 @@ function Mover (jqEl) {
   return this;
 }
 setInterval(tick, 100);
+$('#btn-reset').on('click', function() {
+  $('#meteor1').css({
+    left: '50px',
+    top: '0px'
+  });
+  meteor.init();
+});
