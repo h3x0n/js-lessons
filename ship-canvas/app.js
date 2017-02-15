@@ -4,13 +4,21 @@ function Ship(stage, x, y) {
     var step = 5;
     var data = new createjs.SpriteSheet({
       "images": ["images/car-sprite.png"],
-      "frames": {"count": 15, "width": 66, "height": 66},
+      "frames": {"count": 4, "width": 66, "height": 66},
       "animations": {
         left:   [1],
         right:  [2],
         top:    [3],
         bottom: [0]
       }
+      // "images": ["images/ship.png"],
+      // "frames": {"count": 4, "width": 96, "height": 96},
+      // "animations": {
+      //   left:   [1],
+      //   right:  [3],
+      //   top:    [0],
+      //   bottom: [2]
+      // }
     });
     me.symbol = new createjs.Sprite(data,'top');
     me.moveLeft = function() {
